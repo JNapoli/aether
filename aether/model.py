@@ -1,9 +1,9 @@
 import numpy as np
-import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 class Convnet(nn.Module):
+
   def __init__(self, verbose=True):
     super(Convnet, self).__init__()
 
@@ -15,18 +15,6 @@ class Convnet(nn.Module):
     # 2 fully-connected layers
     self.fc1 = nn.Linear(32 * 2 * 2, 100)
     self.fc2 = nn.Linear(100, 10)
-
-    # Check for GPU acceleration
-    self.device = torch.device("cuda:0"
-                               if torch.cuda.is_available()
-                               else "cpu")
-
-    # Model settings
-    self.verbose = verbose
-    self.loaders = {
-        'train': None,
-        'test': None
-    }
 
   def forward(self, x):
     """
@@ -49,9 +37,3 @@ class Convnet(nn.Module):
     # Get all dimensions except batch dimension
     size = x.size()[1:]
     return np.prod(size)
-
-  def set_loaders(self, loader_train, loader_test):
-    """
-    """
-    self.loaders['train'] = loader_train
-    self.loaders['test'] = loader_test
