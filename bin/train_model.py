@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import aether
 import argparse
+import numpy as np
 import os
 import torch
 import torchvision
@@ -48,7 +49,7 @@ def main(args):
     job = aether.job.Job(model, train_loader, test_loader)
 
     # Train and save model
-    job.train_model(epochs=2, lr=0.001, opt=torch.optim.SGD)
+    job.train_model(epochs=args.epochs, lr=0.001, opt=torch.optim.SGD)
     job.test_model()
     torch.save(model.state_dict(), args.path_save_model)
 
@@ -63,6 +64,11 @@ if __name__ == '__main__':
     parser.add_argument('path_save_data',
                         type=str,
                         help='Directory in which to save the data set.')
+    parser.add_argument('-epochs',
+                        type=int,
+                        required=False,
+                        default=5,
+                        help='Number of training epochs.')
     parser.add_argument('-batch',
                         type=int,
                         required=False,
