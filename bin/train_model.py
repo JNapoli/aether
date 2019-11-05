@@ -1,3 +1,4 @@
+import aether
 import argparse
 import os
 import torch
@@ -39,6 +40,17 @@ def main(args):
     # MNIST classes
     classes = np.arange(10)
 
+    # Create and train model
+    model = aether.model.Convnet()
+
+    # Create a job to bundle data with model
+    job = aether.job.Job(model, train_loader, test_loader)
+
+    # Train and save model
+    job.train_model(epochs=2, lr=0.001, opt=torch.optim.SGD)
+    job.test_model()
+    torch.save(model.state_dict(), args.path_save_model)
+    
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
