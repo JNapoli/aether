@@ -64,9 +64,3 @@ class Job(object):
 
         acc = 100 * correct / total
         print('Accuracy of the network on the 10000 test images: %d %%' % (acc))
-
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()
