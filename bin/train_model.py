@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import aether
 import argparse
 import os
@@ -50,7 +51,7 @@ def main(args):
     job.train_model(epochs=2, lr=0.001, opt=torch.optim.SGD)
     job.test_model()
     torch.save(model.state_dict(), args.path_save_model)
-    
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -58,11 +59,9 @@ if __name__ == '__main__':
     )
     parser.add_argument('path_save_model',
                         type=str,
-                        required=True,
                         help='Directory in which to save the model.')
     parser.add_argument('path_save_data',
                         type=str,
-                        required=True,
                         help='Directory in which to save the data set.')
     parser.add_argument('-batch',
                         type=int,
