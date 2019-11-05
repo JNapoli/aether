@@ -7,13 +7,13 @@ class Convnet(nn.Module):
         super(Convnet, self).__init__()
 
         # 3 convolutional layers
-        self.conv1 = nn.Conv2d(1, 6, 3)
-        self.conv2 = nn.Conv2d(6, 16, 3)
-        self.conv3 = nn.Conv2d(16, 32, 3)
+        self.conv1 = nn.Conv2d(1, 6, 5)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        self.conv3 = nn.Conv2d(16, 64, 2)
 
         # 2 fully-connected layers
-        self.fc1 = nn.Linear(32 * 2 * 2, 100)
-        self.fc2 = nn.Linear(100, 10)
+        self.fc1 = nn.Linear(64, 20)
+        self.fc2 = nn.Linear(20, 10)
 
     def forward(self, x):
         """
