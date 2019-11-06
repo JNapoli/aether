@@ -58,7 +58,8 @@ class Job(object):
                     opt=optim.Adam,
                     criterion=nn.CrossEntropyLoss(),
                     epochs=3,
-                    lr=0.0001):
+                    lr=0.0001,
+                    stride_print=1000):
         """Train the model.
 
         Parameters
@@ -76,31 +77,42 @@ class Job(object):
         if not (self.loaders['train'] and self.loaders['test']):
             raise AttributeError('Data loaders have not been initialized.')
 
+        # Instantiate optimizer and set model to train mode
         optimizer = opt(self.model.parameters(), lr=lr)
         self.model.train()
 
+        # Train and monitor loss
+        # Note: Structure mirrors Pytorch tutorial @
+        #   https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
         for i_epoch in range(epochs):
+
             running_loss = 0.0
             for i_data, data in enumerate(self.loaders['train']):
+
+                # Evaluate outputs, perform backprop, and take a step
                 inputs, labels = data
                 optimizer.zero_grad()
                 outputs = self.model(inputs)
                 loss = criterion(outputs, labels)
                 loss.backward()
                 optimizer.step()
-                # print statistics
                 running_loss += loss.item()
-                if i_data % 1000 == 999 and self.verbose:
+
+                # Monitor progress
+                if i_data % stride_print == 0 and self.verbose:
                     print('[%d, %5d] loss: %.3f' %
-                    (i_epoch + 1, i_data + 1, running_loss / 1000))
+                    (i_epoch + 1, i_data + 1, running_loss / stride_print))
                     sys.stdout.flush()
                     running_loss = 0.0
 
 
     def test_model(self):
-        """Evaluate the model over the test set."""
+        """Evaluate the model over the test set and print accuracy."""
 
+        # Set eval mode
         self.model.eval()
+
+        # Accumulate stats
         total, correct = 0, 0
         with torch.no_grad():
             for data in self.loaders['test']:
@@ -110,5 +122,6 @@ class Job(object):
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
 
+        # Print accuracy
         acc = 100 * correct / total
         print('Accuracy of the network on the 10000 test images: %d %%' % (acc))
