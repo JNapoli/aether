@@ -4,7 +4,6 @@ import argparse
 import numpy as np
 import os
 import torch
-import torchvision
 
 from torchvision import datasets, transforms
 
@@ -31,10 +30,10 @@ def main(args):
                                                num_workers=0)
 
     # Download test set and create dataloader
-    test = torchvision.datasets.MNIST(root=args.path_save_data,
-                                      train=False,
-                                      download=True,
-                                      transform=MNIST_transform)
+    test = datasets.MNIST(root=args.path_save_data,
+                          train=False,
+                          download=True,
+                          transform=MNIST_transform)
     test_loader = torch.utils.data.DataLoader(test,
                                               batch_size=args.batch,
                                               shuffle=False,
