@@ -4,8 +4,42 @@ import torch.nn as nn
 import torch.optim as optim
 
 class Job(object):
-    def __init__(self, model, loader_train, loader_test,
-                 verbose=True):
+    """
+    A class used to bundle train/test data together with the model to be fit.
+
+    Attributes
+    ----------
+    model : torch.nn.Module
+        Pytorch model to fit
+    loaders : dict
+        Contains data loaders for train/test data
+    device :
+        Checks whether GPUs are available
+    verbose : bool
+        Controls verbosity of the output
+
+    Methods
+    -------
+    train_model
+        Trains the model over the data yielded by the training loader
+    test_model
+        Tests the model over the data yielded by the test loader
+    """
+
+    def __init__(self, model, loader_train, loader_test, verbose=True):
+        """
+        Parameters
+        ----------
+        model : torch.nn.Module
+            Pytorch model to optimize
+        loader_train : torch.utils.data.DataLoader
+            Data loader for training data
+        loader_test : torch.utils.data.DataLoader
+            Data loader for testing data
+        verbose : bool
+            Controls verbosity of the output
+        """
+
         self.model = model
         self.loaders = {
             'train': loader_train,
@@ -16,16 +50,29 @@ class Job(object):
         self.device = torch.device("cuda:0"
                                    if torch.cuda.is_available()
                                    else "cpu")
-        # Model settings
+        # Job settings
         self.verbose = verbose
+
 
     def train_model(self,
                     opt=optim.Adam,
                     criterion=nn.CrossEntropyLoss(),
                     epochs=3,
                     lr=0.0001):
+        """Train the model.
+
+        Parameters
+        ----------
+        opt : Pytorch Optimizer object
+            Optimizer to use
+        criterion : Loss function
+            Criterion to use for minimization
+        epochs : int
+            Number of epochs for training
+        lr : float
+            Learning rate to pass to the optimizer
         """
-        """
+
         if not (self.loaders['train'] and self.loaders['test']):
             raise AttributeError('Data loaders have not been initialized.')
 
@@ -49,9 +96,10 @@ class Job(object):
                     sys.stdout.flush()
                     running_loss = 0.0
 
+
     def test_model(self):
-        """
-        """
+        """Evaluate the model over the test set."""
+
         self.model.eval()
         total, correct = 0, 0
         with torch.no_grad():
