@@ -1,4 +1,18 @@
-#!/usr/bin/env python
+"""MNIST training pipeline implemented in PyTorch.
+
+This script implements a simple training pipeline for a convolutional neural
+network model, intended for MNIST digit classification.
+
+Details about the script's arguments can be displayed by running:
+>>> python train_model.py -h
+
+Dependencies for all packages and scripts can be installed using the
+`requirements.txt` file in the repo's root directory.
+
+This is intended for use as a processing script, and presently the data set
+is hard-coded as MNIST, though this may be refactored at a later time so
+that the user can easily swap in different datasets. 
+"""
 import aether
 import argparse
 import os
