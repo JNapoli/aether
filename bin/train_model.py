@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import aether
 import argparse
-import numpy as np
 import os
 import torch
 
@@ -38,8 +37,6 @@ def main(args):
                                               batch_size=args.batch,
                                               shuffle=False,
                                               num_workers=0)
-    # MNIST classes
-    classes = np.arange(10)
 
     # Create and train model
     model = aether.model.Convnet()
