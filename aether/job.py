@@ -104,6 +104,7 @@ class Job(object):
         # Whether to save loss data
         if training_curves:
             assert dir_data is not None, 'Specify where to save loss data.'
+            assert os.path.exists(dir_data), 'Data directory does not exist.'
             losses = []
 
         # Instantiate optimizer and set model to train mode
