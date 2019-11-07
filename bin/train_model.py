@@ -74,7 +74,10 @@ if __name__ == '__main__':
                         help='Directory in which to save the model.')
     parser.add_argument('path_save_datasets',
                         type=str,
-                        help='Directory in which to save the data set.')
+                        help='Directory in which to save the data sets.')
+    parser.add_argument('path_save_data',
+                        type=str,
+                        help='Directory to save data output by the job.')
     parser.add_argument('-epochs',
                         type=int,
                         required=False,
