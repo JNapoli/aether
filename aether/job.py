@@ -99,7 +99,7 @@ class Job(object):
                 running_loss += loss.item()
 
                 # Monitor progress
-                if i_data % stride_print == 0 and self.verbose:
+                if i_data % stride_print == stride_print - 1 and self.verbose:
                     print('[%d, %5d] loss: %.3f' %
                     (i_epoch + 1, i_data + 1, running_loss / stride_print))
                     sys.stdout.flush()
