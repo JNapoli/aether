@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+
 class Job(object):
     """
     A class used to bundle train/test data together with the model to be fit.
@@ -76,7 +77,9 @@ class Job(object):
                     criterion=nn.CrossEntropyLoss(),
                     epochs=3,
                     lr=0.0001,
-                    stride_print=1000):
+                    stride_print=1000,
+                    training_curves=False,
+                    dir_data=None):
         """Train the model.
 
         Parameters
@@ -93,6 +96,11 @@ class Job(object):
 
         if not (self.loaders['train'] and self.loaders['test']):
             raise AttributeError('Data loaders have not been initialized.')
+
+        # Whether to save loss data
+        if training_curves:
+            assert dir_data is not None, 'Specify where to save loss data.'
+            losses = []
 
         # Instantiate optimizer and set model to train mode
         optimizer = opt(self.model.parameters(), lr=lr)
@@ -121,6 +129,14 @@ class Job(object):
                     (i_epoch + 1, i_data + 1, running_loss / stride_print))
                     sys.stdout.flush()
                     running_loss = 0.0
+
+            if training_curves:
+                losses.append( self.get_losses(criterion=criterion) )
+
+        if training_curves:
+            losses = np.array(losses)
+            fn_save = os.path.join(dir_data, 'loss_curves.npy')
+            np.save(fn_save, losses)
 
 
     def test_model(self):
