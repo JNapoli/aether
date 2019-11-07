@@ -56,6 +56,21 @@ class Job(object):
         self.verbose = verbose
 
 
+    def get_losses(self, criterion=nn.CrossEntropyLoss()):
+        # Get training loss and testing loss
+        self.model.eval()
+        with torch.no_grad():
+            train_loss = np.array([
+                criterion(self.model(inputs), labels).item()
+                for (inputs, labels) in self.loaders['train']
+            ]).mean()
+            test_loss = np.array([
+                criterion(self.model(inputs), labels).item()
+                for (inputs, labels) in self.loaders['test']
+            ]).mean()
+        return train_loss, test_loss
+
+
     def train_model(self,
                     opt=optim.Adam,
                     criterion=nn.CrossEntropyLoss(),
