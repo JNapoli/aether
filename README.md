@@ -5,9 +5,9 @@ digit classification using [PyTorch](https://pytorch.org/).
 
 ## Overview
 
-This repo contains [scripts](/aether/bin/) for training a convolutional neural
+This repo contains scripts for training a convolutional neural
 network on the MNIST data set and for launching an inference server that
-serves the resulting model. The [aether](/aether/aether/) package contains
+serves the resulting model. The aether package contains
 classes that simplify the training pipeline.
 
 ## Installation
