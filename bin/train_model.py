@@ -11,10 +11,11 @@ Dependencies for all packages and scripts can be installed using the
 
 This is intended for use as a processing script, and presently the data set
 is hard-coded as MNIST, though this may be refactored at a later time so
-that the user can easily swap in different datasets. 
+that the user can easily swap in different datasets.
 """
 import aether
 import argparse
+import numpy as np
 import os
 import torch
 
@@ -29,11 +30,11 @@ def main(args):
     ])
 
     # Directory for saving dataset
-    if not os.path.exists(args.path_save_data):
-        os.mkdir(args.path_save_data)
+    if not os.path.exists(args.path_save_datasets):
+        os.mkdir(args.path_save_datasets)
 
     # Download training set and create dataloader
-    train = datasets.MNIST(root=args.path_save_data,
+    train = datasets.MNIST(root=args.path_save_datasets,
                            train=True,
                            download=True,
                            transform=MNIST_transform)
@@ -43,7 +44,7 @@ def main(args):
                                                num_workers=0)
 
     # Download test set and create dataloader
-    test = datasets.MNIST(root=args.path_save_data,
+    test = datasets.MNIST(root=args.path_save_datasets,
                           train=False,
                           download=True,
                           transform=MNIST_transform)
@@ -71,7 +72,7 @@ if __name__ == '__main__':
     parser.add_argument('path_save_model',
                         type=str,
                         help='Directory in which to save the model.')
-    parser.add_argument('path_save_data',
+    parser.add_argument('path_save_datasets',
                         type=str,
                         help='Directory in which to save the data set.')
     parser.add_argument('-epochs',
