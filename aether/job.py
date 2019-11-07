@@ -118,8 +118,8 @@ class Job(object):
         total, correct = 0, 0
         with torch.no_grad():
             for data in self.loaders['test']:
-                images, labels = data
-                outputs = self.model(images)
+                inputs, labels = data
+                outputs = self.model(inputs)
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
