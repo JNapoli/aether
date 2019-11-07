@@ -79,13 +79,13 @@ class Job(object):
 
         # Instantiate optimizer and set model to train mode
         optimizer = opt(self.model.parameters(), lr=lr)
-        self.model.train()
 
         # Train and monitor loss
         # Note: Structure mirrors Pytorch tutorial @
         #   https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
         for i_epoch in range(epochs):
 
+            self.model.train()
             running_loss = 0.0
             for i_data, data in enumerate(self.loaders['train']):
 
