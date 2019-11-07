@@ -92,6 +92,10 @@ class Job(object):
             Number of epochs for training
         lr : float
             Learning rate to pass to the optimizer
+        training_curves : bool
+            Whether to generate and save loss curves
+        dir_data :
+            Path to directory in which to save loss data
         """
 
         if not (self.loaders['train'] and self.loaders['test']):
