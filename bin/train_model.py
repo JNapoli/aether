@@ -60,7 +60,11 @@ def main(args):
     job = aether.job.Job(model, train_loader, test_loader)
 
     # Train and save model
-    job.train_model(epochs=args.epochs, lr=0.001, opt=torch.optim.SGD)
+    job.train_model(epochs=args.epochs,
+                    lr=0.001,
+                    opt=torch.optim.SGD,
+                    training_curves=True,
+                    dir_data=args.path_save_data)
     job.test_model()
     torch.save(model.state_dict(), args.path_save_model)
 
