@@ -61,7 +61,7 @@ python train_model.py -h
 
 The above will train the model over 10 epochs over the MNIST dataset
 and output results / the model to the specified locations. It is recommended to
-use full paths to filenames and directories. After training, the script will
+use full paths for specifying files and directories. After training, the script will
 print out the accuracy of the resulting model evaluated over the test set.
 The pre-trained model included here was trained for 50 epochs and exhibits
 98% test accuracy over the MNIST test set. This performance far exceeds the
