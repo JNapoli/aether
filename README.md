@@ -87,7 +87,7 @@ specified above. For example, the short python script:
 import requests
 
 response = requests.post(
-    'http://127.0.0.1:5000/',
+    'http://127.0.0.1:5000/predict',
     files={'file': open('./mnist_image.jpg', 'rb')}
 )
 print('Result:')
@@ -95,9 +95,28 @@ print(response.json()['class_name'])
 print(response.json()['class_prob'])
 ```
 Would run inference on the image ```mnist_image.jpg``` and print the result.
-```response.json()``` will returns a dictionary containing both the predicted
+```response.json()``` returns a dictionary containing both the predicted
 class of the number in the image as well as the probability associated with the
 prediction.
+
+In this repo, [run_inference.py](./bin/run_inference.py) is a script that runs
+inference over a collection of jpg images contained in a directory. Running:
+
+```bash
+python run_inference.py /path/to/MNIST_jpeg_images/ http://127.0.0.1:5000/predict \
+       /path/to/result.csv
+```
+
+will run inference for each jpg image contained in the provided directory and output
+a csv file containing the image name, the predicted class, and the probability.
+Inference was benchmarked on my machine and the rate was 96 images per second.
+Further performance gains may be achieved by migrating to a more scalable development
+server other than Flask.
+
+For convenience, a [zipped directory](./data/MNIST_jpeg_for_inference.zip)
+is included in this repo which contains MNIST images that can be used to test inference.
+Inference has only been tested for jpg images, though support for other file types
+may be added later.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to
