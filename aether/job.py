@@ -27,6 +27,8 @@ class Job(object):
         Trains the model over the data yielded by the training loader
     test_model
         Tests the model over the data yielded by the test loader
+    get_losses
+        Evaluates the loss function over the train and test sets
     """
 
     def __init__(self, model, loader_train, loader_test, verbose=True):
@@ -43,6 +45,8 @@ class Job(object):
             Controls verbosity of the output
         """
 
+        assert all([model, loader_train, loader_test]), \
+               'Model and loaders must not be None.'
         self.model = model
         self.loaders = {
             'train': loader_train,
@@ -58,7 +62,21 @@ class Job(object):
 
 
     def get_losses(self, criterion=nn.CrossEntropyLoss()):
-        # Get training loss and testing loss
+        """Evaluate loss function over train and test sets.
+
+        Parameters
+        ----------
+        criterion : Loss function
+            Criterion to use for minimization
+
+        Returns
+        -------
+        train_loss : float
+            Average loss evaluated over the training set
+        test_loss : float
+            Average loss evaluated over the test set
+        """
+
         self.model.eval()
         with torch.no_grad():
             train_loss = np.array([
@@ -104,7 +122,7 @@ class Job(object):
         # Whether to save loss data
         if training_curves:
             assert dir_data is not None, 'Specify where to save loss data.'
-            assert os.path.exists(dir_data), 'Data directory does not exist.'
+            assert os.path.exists(dir_data), 'Specified directory does not exist.'
             losses = []
 
         # Instantiate optimizer and set model to train mode
