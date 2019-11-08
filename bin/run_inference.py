@@ -20,7 +20,7 @@ def main(args):
         fn for fn in sorted( glob.glob(os.path.join(args.path_dir_jpeg, '*.jpg')) )
     ]
 
-    # Initialize result
+    # Process files
     queries = []
     for fn in fns_jpg:
         resp = requests.post(
