@@ -6,7 +6,6 @@ NOTE: Server must be launched before running this script.
 import argparse
 import csv
 import glob
-import json
 import os
 import requests
 import time
