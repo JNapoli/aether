@@ -13,45 +13,46 @@ classes that simplify the training pipeline.
 ## Installation
 
 The following steps have been verified to be reproducible on MacOS Catalina.
-The code requires Python v3.7.5. It is recommended to first create and activate
-a Python environment using [Miniconda](https://docs.conda.io/en/latest/miniconda.html):
+The code requires Python v3.7.5 and can be reproduced according to the following
+steps:
+
+1. Create and activate a Python environment ([Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+ is recommended) and install the dependencies in requirements-conda.txt:
 
 ```bash
-conda create -n aether python=3.7.5
+conda create --name aether python=3.7.5 --file requirements-conda.txt
 source activate aether
 ```
 
-This package can then be downloaded and run as follows:
-
-1. Clone this repo using:
+2. Clone this repository:
 ```bash
 git clone https://github.com/JNapoli/aether.git
 cd aether/
 ```
 
-2. Create a virtual environment (ensure that [Venv](https://docs.python.org/3.6/library/venv.html#module-venv) is available):
+3. Source the env.sh file in the root directory. This will add the aether
+package to your PYTHONPATH environment variable:
 ```bash
-python3 -m venv my-env
-source my-env/bin/activate
+. env.sh
 ```
 
-3. Install required packages via pip3:
+4. Confirm that the PYTHONPATH environment variable was properly set:
 ```bash
-pip3 install -r requirements.txt
+echo $PYTHONPATH
 ```
+
+You should be good to go!
 
 ## Usage
 
-### Training
+### Re-fitting the model
 
 ```bash
-#python3 predict.py --path_track /FULL/PATH/TO/AUDIO/FILE/track.mp3
 ```
 
-### Serving
+### Serving the model and running inference
 
 ```bash
-#
 ```
 
 ## Contributing
