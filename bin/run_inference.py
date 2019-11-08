@@ -1,5 +1,8 @@
 """Script for running inference on a collection of new images.
 
+For information on required arguments, please see the README or run:
+python run_inference.py -h
+
 NOTE: Server must be launched before running this script.
 """
 
@@ -19,10 +22,12 @@ def main(args):
     fns_jpg = [
         fn for fn in sorted( glob.glob(os.path.join(args.path_dir_jpeg, '*.jpg')) )
     ]
+    assert len(fns_jpg) > 0, 'Provided directory is empty.'
 
     # Process files
     queries = []
     for fn in fns_jpg:
+        assert fn[-4:] == '.jpg', 'Only jpg files are supported currently.'
         resp = requests.post(
             args.server_address,
             files={'file': open(fn, 'rb')}
