@@ -79,6 +79,26 @@ python app.py /repo_root_dir/models/pretrained/pretrained.pt
 Running the above will launch the app and indicate where it is running (e.g. on my
 machine, it indicates ```Running on http://127.0.0.1:5000/```).
 
+### Inference
+Inference may now be performed on additional data by making requests to the address
+specified above. For example, the short python script:
+
+```python
+import requests
+
+response = requests.post(
+    'http://127.0.0.1:5000/',
+    files={'file': open('./mnist_image.jpg', 'rb')}
+)
+print('Result:')
+print(response.json()['class_name'])
+print(response.json()['class_prob'])
+```
+Would run inference on the image ```mnist_image.jpg``` and print the result.
+```response.json()``` will returns a dictionary containing both the predicted
+class of the number in the image as well as the probability associated with the
+prediction.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to
 discuss what you would like to change.
