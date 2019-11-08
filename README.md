@@ -68,10 +68,16 @@ The pre-trained model included here was trained for 50 epochs and exhibits
 random classification accuracy of 10% that would be expected if the model did
 not learn anything.
 
-### Serving the model and running inference
+### Serving the model
+The resulting model can be served using the [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+app in [app.py](./bin/app.py), for example:
 
 ```bash
+python app.py /repo_root_dir/models/pretrained/pretrained.pt
 ```
+
+Running the above will launch the app and indicate where it is running (e.g. on my
+machine, it indicates ```Running on http://127.0.0.1:5000/```).
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to
