@@ -48,8 +48,10 @@ You should be good to go!
 ### Re-fitting the model
 
 A pre-trained model can be found in [./models/pretrained/](./models/pretrained/).
-To fit a new model, run [train_model.py](./bin/train_model.py) in the bin directory.
+To fit a new model, run [train_model.py](./bin/train_model.py) in the bin directory:
 ```bash
+python train_model.py /path/to/output/model.pt /path/for/storing/datasets/ \
+       /path/to/directory/for/saving/output/data/ -epochs 10
 ```
 
 ### Serving the model and running inference
