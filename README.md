@@ -47,6 +47,8 @@ You should be good to go!
 
 ### Re-fitting the model
 
+A pre-trained model can be found in [./models/pretrained/](./models/pretrained/).
+To fit a new model, run [train_model.py](./bin/train_model.py) in the bin directory.
 ```bash
 ```
 
