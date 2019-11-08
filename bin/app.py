@@ -11,9 +11,9 @@ import json
 import os
 import torch
 
-from torchvision import models, transforms
-from PIL import Image
 from flask import Flask, jsonify, request
+from PIL import Image
+from torchvision import models, transforms
 
 
 # Our Flask app
