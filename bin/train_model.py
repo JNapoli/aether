@@ -53,7 +53,7 @@ def main(args):
                                               shuffle=False,
                                               num_workers=0)
 
-    # Create and train model
+    # Create model
     model = aether.model.Convnet()
 
     # Create a job to bundle data with model
