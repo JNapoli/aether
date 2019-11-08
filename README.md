@@ -54,6 +54,20 @@ python train_model.py /path/to/output/model.pt /path/for/storing/datasets/ \
        /path/to/directory/for/saving/output/data/ -epochs 10
 ```
 
+For more details, you can run:
+```bash
+python train_model.py -h
+```
+
+The above will train the model over 10 epochs over the MNIST dataset
+and output results / the model to the specified locations. It is recommended to
+use full paths to filenames and directories. After training, the script will
+print out the accuracy of the resulting model evaluated over the test set.
+The pre-trained model included here was trained for 50 epochs and exhibits
+98% test accuracy over the MNIST test set. This performance far exceeds the
+random classification accuracy of 10% that would be expected if the model did
+not learn anything.
+
 ### Serving the model and running inference
 
 ```bash
