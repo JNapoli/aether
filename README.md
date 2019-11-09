@@ -65,10 +65,12 @@ The above will train the model over 10 epochs on the MNIST dataset
 and output results / the model to the specified locations. Please use
 full paths for specifying files and directories. After training, the script will
 print out the accuracy of the resulting model evaluated over the test set.
-The pre-trained model included here was trained for 50 epochs and exhibits
-98% test accuracy over the MNIST test set. This performance far exceeds the
-random classification accuracy of 10% that would be expected if the model did
-not learn anything.
+
+The pre-trained model included here was trained for 50 epochs on the torchvision MNIST
+training dataset and scores 98% test accuracy on the MNIST test set. This
+robust performance far exceeds the random classification accuracy of 10% that
+would be expected if the model did not learn anything, and indicates the model
+is not pathologically overfitting the training data.
 
 ### Serving the model
 The resulting model can be served using the [Flask](https://flask.palletsprojects.com/en/1.1.x/)
