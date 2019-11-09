@@ -112,7 +112,7 @@ python run_inference.py /path/to/MNIST_jpeg_images/ http://127.0.0.1:5000/predic
 will run inference for each jpg image contained in the provided directory and output
 a csv file containing the image name, the predicted class, and the probability.
 Inference was benchmarked on my machine and the rate was 96 images per second.
-Further performance gains may be achieved by migrating to a more scalable development
+Further performance gains may be achieved by migrating to a more scalable production
 server other than Flask.
 
 For convenience, a [zipped directory](./data/MNIST_jpeg_for_inference.zip)
